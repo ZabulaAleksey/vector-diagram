@@ -3,18 +3,6 @@ import VectorDiagram from "./VectorDiagram";
 import InputForm from "./InputForm";
 import "./App.css";
 
-VectorDiagram.propTypes = {
-    vectors: PropTypes.arrayOf(
-        PropTypes.shape({
-            startX: PropTypes.number.isRequired,
-            startY: PropTypes.number.isRequired,
-            endX: PropTypes.number.isRequired,
-            endY: PropTypes.number.isRequired,
-            color: PropTypes.string
-        })
-    ).isRequired
-};
-
 const App = () => {
     const [voltage, setVoltage] = useState(220);
     const [impedances, setImpedances] = useState([
