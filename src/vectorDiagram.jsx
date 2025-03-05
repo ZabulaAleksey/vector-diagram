@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 
 const VectorDiagram = ({ vectors }) => {
     const canvasRef = useRef(null);
@@ -12,9 +13,31 @@ const VectorDiagram = ({ vectors }) => {
 
         const offsetX = canvas.width / 2;
         const offsetY = canvas.height / 2;
+        const gridSize = 50;
 
-        // Рисуем оси координат
-        ctx.strokeStyle = "#ddd";
+        ctx.strokeStyle = "#444";
+        ctx.lineWidth = 0.5;
+
+        for (let x = 0; x <= canvas.width / 2; x += gridSize) {
+            ctx.beginPath();
+            ctx.moveTo(offsetX + x, 0);
+            ctx.lineTo(offsetX + x, canvas.height);
+            ctx.moveTo(offsetX - x, 0);
+            ctx.lineTo(offsetX - x, canvas.height);
+            ctx.stroke();
+        }
+
+        for (let y = 0; y <= canvas.height / 2; y += gridSize) {
+            ctx.beginPath();
+            ctx.moveTo(0, offsetY + y);
+            ctx.lineTo(canvas.width, offsetY + y);
+            ctx.moveTo(0, offsetY - y);
+            ctx.lineTo(canvas.width, offsetY - y);
+            ctx.stroke();
+        }
+
+        ctx.strokeStyle = "white";
+        ctx.lineWidth = 1.5;
         ctx.beginPath();
         ctx.moveTo(0, offsetY);
         ctx.lineTo(canvas.width, offsetY);
@@ -22,7 +45,19 @@ const VectorDiagram = ({ vectors }) => {
         ctx.lineTo(offsetX, canvas.height);
         ctx.stroke();
 
-        // Рисуем векторы
+        ctx.fillStyle = "white";
+        ctx.font = "14px Arial";
+
+        for (let x = gridSize; x <= canvas.width / 2; x += gridSize) {
+            ctx.fillText((x / 10).toFixed(1), offsetX + x, offsetY + 15);
+            ctx.fillText((-x / 10).toFixed(1), offsetX - x, offsetY + 15);
+        }
+
+        for (let y = gridSize; y <= canvas.height / 2; y += gridSize) {
+            ctx.fillText((-y / 10).toFixed(1), offsetX - 5, offsetY + y + 5);
+            ctx.fillText((y / 10).toFixed(1), offsetX - 5, offsetY - y + 5);
+        }
+
         vectors.forEach(({ startX, startY, endX, endY, color }) => {
             ctx.strokeStyle = color || "blue";
             ctx.lineWidth = 2;
@@ -32,7 +67,6 @@ const VectorDiagram = ({ vectors }) => {
             ctx.lineTo(endX + offsetX, -endY + offsetY);
             ctx.stroke();
 
-            // Стрелка в конце вектора
             const angle = Math.atan2(endY - startY, endX - startX);
             const arrowSize = 8;
             ctx.fillStyle = color || "blue";
@@ -51,7 +85,19 @@ const VectorDiagram = ({ vectors }) => {
         });
     }, [vectors]);
 
-    return <canvas ref={canvasRef} width={400} height={400} className="canvas" />;
+    return <canvas ref={canvasRef} width={450} height={450} className="canvas" />;
+};
+
+VectorDiagram.propTypes = {
+    vectors: PropTypes.arrayOf(
+        PropTypes.shape({
+            startX: PropTypes.number.isRequired,
+            startY: PropTypes.number.isRequired,
+            endX: PropTypes.number.isRequired,
+            endY: PropTypes.number.isRequired,
+            color: PropTypes.string
+        })
+    ).isRequired
 };
 
 export default VectorDiagram;

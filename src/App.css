@@ -54,7 +54,8 @@
 
 .inputs {
   flex: 1;
-  min-width: 350px;
+  min-width: 300px;
+  max-width: 400px;
 }
 
 .canvas-container {
@@ -74,18 +75,20 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   margin-top: 8px;
+  width: 100%;
 }
 
-button {
-  padding: 6px 12px;
-  background: black;
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: 0.2s;
+.impedance input {
+  width: 70px;
+  text-align: center;
 }
+
+.impedance button {
+  white-space: nowrap;
+}
+
 
 button:hover {
   background: #333;
@@ -105,4 +108,27 @@ button:hover {
   .canvas-container {
       width: 100%;
   }
+
+  .impedance {
+      justify-content: center;
+  }
+}
+
+.impedance-table {
+  display: grid;
+  grid-template-columns: auto 80px auto 80px auto;
+  align-items: center;
+  gap: 10px;
+  max-width: 400px;
+}
+
+.impedance-table label {
+  text-align: right;
+  font-weight: bold;
+  min-width: 30px;
+}
+
+.impedance-table input {
+  width: 80px;
+  text-align: center;
 }
