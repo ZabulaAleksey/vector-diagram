@@ -38,8 +38,8 @@ const InputForm = ({ voltage, setVoltage, impedances, updateImpedance }) => {
 };
 
 InputForm.propTypes = {
-    voltage: PropTypes.number.isRequired, // Линейное напряжение (обязательно)
-    setVoltage: PropTypes.func.isRequired, // Функция для изменения напряжения
+    voltage: PropTypes.number.isRequired,
+    setVoltage: PropTypes.func.isRequired,
     impedances: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.number.isRequired,

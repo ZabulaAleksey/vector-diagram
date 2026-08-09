@@ -1,19 +1,7 @@
 import { useState } from "react";
-import VectorDiagram from "./VectorDiagram";
-import InputForm from "./InputForm";
+import VectorDiagram from "./vectorDiagram";
+import InputForm from "./inputForm";
 import "./App.css";
-
-VectorDiagram.propTypes = {
-    vectors: PropTypes.arrayOf(
-        PropTypes.shape({
-            startX: PropTypes.number.isRequired,
-            startY: PropTypes.number.isRequired,
-            endX: PropTypes.number.isRequired,
-            endY: PropTypes.number.isRequired,
-            color: PropTypes.string
-        })
-    ).isRequired
-};
 
 const App = () => {
     const [voltage, setVoltage] = useState(220);

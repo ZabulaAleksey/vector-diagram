@@ -68,17 +68,17 @@ const VectorDiagram = ({ vectors }) => {
             ctx.stroke();
 
             const angle = Math.atan2(endY - startY, endX - startX);
-            const arrowSize = 8;
+            const arrowSize = 15;
             ctx.fillStyle = color || "blue";
             ctx.beginPath();
             ctx.moveTo(endX + offsetX, -endY + offsetY);
             ctx.lineTo(
-                endX + offsetX - arrowSize * Math.cos(angle - Math.PI / 6),
-                -endY + offsetY + arrowSize * Math.sin(angle - Math.PI / 6)
+                endX + offsetX - arrowSize * Math.cos(angle - Math.PI / 12),
+                -endY + offsetY + arrowSize * Math.sin(angle - Math.PI / 12)
             );
             ctx.lineTo(
-                endX + offsetX - arrowSize * Math.cos(angle + Math.PI / 6),
-                -endY + offsetY + arrowSize * Math.sin(angle + Math.PI / 6)
+                endX + offsetX - arrowSize * Math.cos(angle + Math.PI / 12),
+                -endY + offsetY + arrowSize * Math.sin(angle + Math.PI / 12)
             );
             ctx.closePath();
             ctx.fill();
